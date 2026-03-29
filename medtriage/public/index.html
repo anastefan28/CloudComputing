@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MedTriageAI</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>MedTriageAI</h1>
+      <p class="subtitle">AI-Powered Medical Image Triage Assistant</p>
+      <p class="disclaimer">Decision-support tool only — does not replace clinical judgement</p>
+    </header>
+
+    <div class="upload-section">
+      <div class="upload-area" id="dropZone">
+        <div class="upload-icon">🩻</div>
+        <p>Drop a chest X-ray image here</p>
+        <p class="small">or click to browse (JPEG/PNG, max 10MB)</p>
+        <input type="file" id="fileInput" accept="image/jpeg,image/png" hidden>
+      </div>
+
+      <div id="preview" class="preview" hidden>
+        <img id="previewImg" />
+        <div class="preview-info">
+          <span id="fileName"></span>
+          <button id="removeBtn" class="btn-secondary">Remove</button>
+        </div>
+      </div>
+
+      <button id="analyzeBtn" class="btn-primary" disabled>Analyze Image</button>
+
+      <div id="uploadError" class="error" hidden></div>
+      <div id="loading" class="loading" hidden>
+        <div class="spinner"></div>
+        <p>Uploading and starting analysis...</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/upload.js"></script>
+</body>
+</html>

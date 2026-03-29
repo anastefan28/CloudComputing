@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analysis Result — MedTriageAI</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="/" class="back-link">← New Analysis</a>
+      <h1>MedTriageAI</h1>
+    </header>
+
+    <div class="result-layout">
+      <!-- Left: image -->
+      <div class="image-panel">
+        <div id="imageContainer" class="image-placeholder">
+          <div class="spinner"></div>
+          <p>Loading image...</p>
+        </div>
+      </div>
+
+      <!-- Right: results (progressive reveal) -->
+      <div class="results-panel">
+
+        <!-- Status bar -->
+        <div id="statusBar" class="status-bar status-pending">
+          <span id="statusText">Pending...</span>
+        </div>
+
+        <!-- Section 1: Vision labels (appears at vision_done) -->
+        <div id="visionSection" class="result-card" hidden>
+          <h3>Detected Features</h3>
+          <div id="visionLabels" class="label-list"></div>
+        </div>
+
+        <!-- Section 2: Classification (appears at complete) -->
+        <div id="classificationSection" class="result-card" hidden>
+          <h3>Classification</h3>
+          <div class="classification-result">
+            <span id="classification" class="classification-badge"></span>
+            <span id="severity" class="confidence-badge"></span>
+          </div>
+          <div id="conditionsList" class="conditions-list"></div>
+        </div>
+
+        <!-- Section 3: Findings (appears at complete) -->
+        <div id="findingsSection" class="result-card" hidden>
+          <h3>Key Findings</h3>
+          <p id="findings"></p>
+        </div>
+
+        <!-- Section 4: Explanation (appears at complete) -->
+        <div id="explanationSection" class="result-card" hidden>
+          <h3>AI Explanation</h3>
+          <p id="explanation"></p>
+          <p class="disclaimer">This is an AI-generated analysis for decision support only.</p>
+        </div>
+
+        <!-- Error state -->
+        <div id="errorSection" class="result-card error-card" hidden>
+          <h3>Analysis Error</h3>
+          <p id="errorMessage"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/result.js"></script>
+</body>
+</html>

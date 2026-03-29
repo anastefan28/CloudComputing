@@ -47,14 +47,14 @@ export async function getRecommendations({ guests, type, location, budget, vibe 
   withReviewCounts.sort((a, b) => b.reviewCount - a.reviewCount);
 
   const catalogue = withReviewCounts.slice(0, SEND_TO_AI).map(c => ({
-    id:          c.id,
-    name:        c.name,
-    type:        c.type,
-    county:      c.county,
-    capacity:    c.capacity,
-    price:       c.price,
+    id: c.id,
+    name: c.name,
+    type: c.type,
+    county: c.county,
+    capacity: c.capacity,
+    price: c.price,
     description: c.description,
-    reviews:     c.reviewCount,
+    reviews: c.reviewCount,
   }));
 
   const prompt = `

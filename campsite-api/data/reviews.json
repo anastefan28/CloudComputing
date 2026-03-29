@@ -1,7 +1,7 @@
 [
   {
     "id": "r0000001-0000-0000-0000-000000000001",
-    "campsite_id": "a1b2c3d4-0001-0000-0000-000000000001",
+    "campsite_id": "0a08e2b1-8fb5-4ca4-8f41-db0c33b5638d",
     "user_name": "Alice",
     "rating": 5,
     "body": "Amazing views, would definitely come back!",
@@ -9,7 +9,7 @@
   },
   {
     "id": "r0000002-0000-0000-0000-000000000002",
-    "campsite_id": "a1b2c3d4-0001-0000-0000-000000000001",
+    "campsite_id": "0a08e2b1-8fb5-4ca4-8f41-db0c33b5638d",
     "user_name": "Bob",
     "rating": 4,
     "body": "Great spot, a bit windy at night.",
@@ -17,7 +17,7 @@
   },
   {
     "id": "r0000003-0000-0000-0000-000000000003",
-    "campsite_id": "a1b2c3d4-0002-0000-0000-000000000002",
+    "campsite_id": "0a08e2b1-8fb5-4ca4-8f41-db0c33b5638d",
     "user_name": "Carla",
     "rating": 5,
     "body": "Peaceful and beautiful. Perfect getaway.",

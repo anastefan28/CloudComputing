@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { getCampsites, getCampsite, getCampsiteReviews } from '../services/campsiteService.js';
-import { getWeatherByCoords, getForecastByCoords, getStaticMap } from '../services/weatherService.js';
-
+import { getWeatherByCoords, getForecastByCoords} from '../services/weatherService.js';
+import { getStaticMap } from '../services/mapService.js';
 export const campsiteRouter = Router();
 
 campsiteRouter.get('/', async (req, res, next) => {

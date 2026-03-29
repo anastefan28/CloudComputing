@@ -15,9 +15,9 @@ async function request(path) {
 export async function getCampsites(filters = {}) {
   const params = new URLSearchParams();
   if (filters.location) params.set('location', filters.location);
-  if (filters.type)     params.set('type', filters.type);
-  if (filters.guests)   params.set('guests', filters.guests);
-  if (filters.sort)     params.set('sort', filters.sort);
+  if (filters.type) params.set('type', filters.type);
+  if (filters.guests) params.set('guests', filters.guests);
+  if (filters.sort) params.set('sort', filters.sort);
   const qs = params.toString();
   return request(`/api/campsites${qs ? '?' + qs : ''}`);
 }

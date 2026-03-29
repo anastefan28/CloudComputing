@@ -15,13 +15,13 @@ export async function getWeatherByCoords(lat, lon) {
   const data = await res.json();
 
   return {
-    temp:        Math.round(data.main.temp),
-    feels_like:  Math.round(data.main.feels_like),
-    humidity:    data.main.humidity,
+    temp: Math.round(data.main.temp),
+    feels_like: Math.round(data.main.feels_like),
+    humidity: data.main.humidity,
     description: data.weather[0].description,
-    icon:        `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
-    wind_speed:  data.wind.speed,
-    city:        data.name,
+    icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
+    wind_speed: data.wind.speed,
+    city: data.name,
   };
 }
 
@@ -43,10 +43,10 @@ export async function getForecastByCoords(lat, lon) {
     if (!byDay[date] || hour === '12:00:00') {
       byDay[date] = {
         date,
-        temp_max:    Math.round(entry.main.temp_max),
-        temp_min:    Math.round(entry.main.temp_min),
+        temp_max: Math.round(entry.main.temp_max),
+        temp_min: Math.round(entry.main.temp_min),
         description: entry.weather[0].description,
-        icon:        `https://openweathermap.org/img/wn/${entry.weather[0].icon}@2x.png`,
+        icon: `https://openweathermap.org/img/wn/${entry.weather[0].icon}@2x.png`,
       };
     }
   }
@@ -54,13 +54,3 @@ export async function getForecastByCoords(lat, lon) {
   return Object.values(byDay).slice(0, 5); 
 }
 
-export async function getStaticMap(lat, lon) {
-  const url = `https://maps.geoapify.com/v1/staticmap`
-    + `?style=osm-carto`
-    + `&width=800&height=500`
-    + `&center=lonlat:${lon},${lat}`
-    + `&zoom=10`
-    + `&marker=lonlat:${lon},${lat};color:%232d6a4f;size:large`
-    + `&apiKey=${config.geoapifyApiKey}`;
-  return url; 
-}

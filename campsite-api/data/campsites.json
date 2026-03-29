@@ -106,41 +106,5 @@
     "county": "Sibiu",
     "type": "tent",
     "created_at": "2026-03-01T23:02:45.256Z"
-  },
-  {
-    "id": "296ddee2-61e0-46e4-9a75-937aca306151",
-    "name": "Sunset Ridge Camp",
-    "description": "Beautiful sunsets every evening.",
-    "lat": 45.9,
-    "lon": 24.1,
-    "capacity": 5,
-    "price": 60,
-    "county": "Iasi",
-    "type": "tent",
-    "created_at": "2026-03-02T18:12:55.354Z"
-  },
-  {
-    "id": "0e3d667c-2599-44f9-a6ef-55f9f1765c7c",
-    "name": "Sunset Ridge Camp",
-    "description": "Beautiful sunsets every evening.",
-    "lat": 45.9,
-    "lon": 24.1,
-    "capacity": 5,
-    "price": 60,
-    "county": "Iasi",
-    "type": "tent",
-    "created_at": "2026-03-02T18:15:51.896Z"
-  },
-  {
-    "id": "c6f99273-9100-49e0-aa9c-9e3b78d2faa9",
-    "name": "Sunset Ridge Camp",
-    "description": "Beautiful sunsets every evening.",
-    "lat": 45.9,
-    "lon": 24.1,
-    "capacity": 5,
-    "price": 60,
-    "county": "Iasi",
-    "type": "tent",
-    "created_at": "2026-03-03T08:42:50.566Z"
   }
 ]

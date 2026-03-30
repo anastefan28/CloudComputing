@@ -14,11 +14,20 @@
     </header>
 
     <div class="result-layout">
-      <!-- Left: image -->
+      <!-- Left: image + heatmap toggle -->
       <div class="image-panel">
         <div id="imageContainer" class="image-placeholder">
           <div class="spinner"></div>
           <p>Loading image...</p>
+        </div>
+        <!-- Heatmap toggle (hidden until complete) -->
+        <div id="heatmapToggle" hidden style="margin-top: 0.75rem; text-align: center;">
+          <button class="btn-secondary" id="toggleBtn" onclick="toggleHeatmap()">
+            Show Grad-CAM Heatmap
+          </button>
+          <p style="font-size: 0.8rem; color: #888; margin-top: 0.25rem;">
+            Highlights region the model focused on for <strong id="gradcamLabel"></strong>
+          </p>
         </div>
       </div>
 
@@ -36,7 +45,13 @@
           <div id="visionLabels" class="label-list"></div>
         </div>
 
-        <!-- Section 2: Classification (appears at complete) -->
+        <!-- Section 2: CheXNet pathology scores (appears at complete) -->
+        <div id="chexnetSection" class="result-card" hidden>
+          <h3>CheXNet Pathology Scores</h3>
+          <div id="chexnetScores"></div>
+        </div>
+
+        <!-- Section 3: Classification (appears at complete) -->
         <div id="classificationSection" class="result-card" hidden>
           <h3>Classification</h3>
           <div class="classification-result">
@@ -46,13 +61,13 @@
           <div id="conditionsList" class="conditions-list"></div>
         </div>
 
-        <!-- Section 3: Findings (appears at complete) -->
+        <!-- Section 4: Findings (appears at complete) -->
         <div id="findingsSection" class="result-card" hidden>
           <h3>Key Findings</h3>
           <p id="findings"></p>
         </div>
 
-        <!-- Section 4: Explanation (appears at complete) -->
+        <!-- Section 5: Explanation (appears at complete) -->
         <div id="explanationSection" class="result-card" hidden>
           <h3>AI Explanation</h3>
           <p id="explanation"></p>

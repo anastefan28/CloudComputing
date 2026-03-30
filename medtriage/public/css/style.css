@@ -52,7 +52,9 @@ header h1 { font-size: 2rem; color: #1a1a2e; }
 .btn-secondary {
   background: none; border: 1px solid #ccc; padding: 0.3rem 0.75rem;
   border-radius: 6px; cursor: pointer; font-size: 0.85rem;
+  transition: border-color 0.2s, background 0.2s;
 }
+.btn-secondary:hover { border-color: #2563eb; background: #f0f4ff; color: #2563eb; }
 
 .error { color: #e74c3c; margin-top: 0.5rem; font-size: 0.9rem; }
 
@@ -74,7 +76,24 @@ header h1 { font-size: 2rem; color: #1a1a2e; }
   text-align: center; min-height: 300px;
   display: flex; flex-direction: column; justify-content: center; align-items: center;
 }
-.result-image { width: 100%; border-radius: 12px; border: 1px solid #ddd; }
+.result-image {
+  width: 100%; border-radius: 12px; border: 1px solid #ddd;
+  transition: opacity 0.3s ease;
+}
+
+/* Heatmap toggle */
+.heatmap-toggle {
+  margin-top: 0.75rem;
+  text-align: center;
+}
+.heatmap-toggle p {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 0.35rem;
+}
+.heatmap-toggle strong {
+  color: #1a1a2e;
+}
 
 .results-panel { display: flex; flex-direction: column; gap: 1rem; }
 
@@ -95,7 +114,7 @@ header h1 { font-size: 2rem; color: #1a1a2e; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; } }
 
 .result-card h3 {
-  font-size: 0.95rem; color: #555; margin-bottom: 0.5rem;
+  font-size: 0.95rem; color: #555; margin-bottom: 0.75rem;
   text-transform: uppercase; letter-spacing: 0.03em;
 }
 
@@ -105,6 +124,32 @@ header h1 { font-size: 2rem; color: #1a1a2e; }
   border-radius: 20px; font-size: 0.85rem;
 }
 .label-tag small { color: #6b7280; margin-left: 0.2rem; }
+
+/* CheXNet score bars */
+.chexnet-bar-row {
+  margin-bottom: 0.6rem;
+}
+.chexnet-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+}
+.chexnet-bar-label span:first-child { font-weight: 600; }
+.chexnet-bar-track {
+  background: #e5e7eb;
+  border-radius: 4px;
+  height: 8px;
+  overflow: hidden;
+}
+.chexnet-bar-fill {
+  height: 8px;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+.chexnet-bar-fill.high  { background: #e74c3c; }
+.chexnet-bar-fill.mid   { background: #f59e0b; }
+.chexnet-bar-fill.low   { background: #2563eb; }
 
 .classification-result { display: flex; align-items: center; gap: 0.75rem; }
 .classification-badge {

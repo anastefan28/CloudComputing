@@ -25,13 +25,11 @@ class DenseNet121(nn.Module):
         super(DenseNet121, self).__init__()
         self.model = torchvision.models.densenet121(weights=None)
         num_ftrs = self.model.classifier.in_features
-        self.model.classifier = nn.Sequential(
-            nn.Linear(num_ftrs, num_classes),
-            nn.Sigmoid()
-        )
+        self.model.classifier = nn.Linear(num_ftrs, num_classes)
 
     def forward(self, x):
-        return self.model(x)
+        x = self.model(x)
+        return torch.sigmoid(x)
 
 # Image preprocessing — same as CheXNet paper
 transform = transforms.Compose([
@@ -70,7 +68,7 @@ else:
 
 model.eval()
 
-# Grad-CAM implementation
+# Grad-CAM implementation 
 class GradCAM:
     def __init__(self, model):
         self.model = model

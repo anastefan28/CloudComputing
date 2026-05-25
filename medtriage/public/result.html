@@ -9,18 +9,16 @@
 <body>
   <div class="container">
     <header>
-      <a href="/" class="back-link">← New Analysis</a>
       <h1>MedTriageAI</h1>
     </header>
 
     <div class="result-layout">
-      <!-- Left: image + heatmap toggle -->
+      <!-- Left: image + heatmap + explanation + review -->
       <div class="image-panel">
         <div id="imageContainer" class="image-placeholder">
           <div class="spinner"></div>
           <p>Loading image...</p>
         </div>
-        <!-- Heatmap toggle (hidden until complete) -->
         <div id="heatmapToggle" hidden style="margin-top: 0.75rem; text-align: center;">
           <button class="btn-secondary" id="toggleBtn" onclick="toggleHeatmap()">
             Show Grad-CAM Heatmap
@@ -29,29 +27,89 @@
             Highlights region the model focused on for <strong id="gradcamLabel"></strong>
           </p>
         </div>
+
+        <div id="explanationSection" class="result-card" hidden>
+          <h3>AI Explanation</h3>
+          <p id="explanation"></p>
+          <p class="disclaimer">This is an AI-generated analysis for decision support only.</p>
+        </div>
+
+        <!-- Clinician Review Panel -->
+        <div id="reviewSection" class="result-card review-card" hidden>
+          <h3>Clinician Review</h3>
+          <div class="review-form">
+            <div class="form-group">
+              <label for="reviewFindings">Findings (editable)</label>
+              <textarea id="reviewFindings" rows="5" placeholder="Edit or confirm the AI-generated findings..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="reviewSeverity">Severity Assessment</label>
+              <select id="reviewSeverity">
+                <option value="normal">Normal</option>
+                <option value="mild">Mild</option>
+                <option value="moderate">Moderate</option>
+                <option value="severe">Severe</option>
+              </select>
+            </div>
+            <div class="review-actions">
+              <button class="btn-draft" onclick="submitReview(false)">Save Draft</button>
+              <button class="btn-signoff" onclick="submitReview(true)">Sign Off & Finalize</button>
+              <button class="btn-escalate" onclick="escalateCase()">Escalate to Radiologist</button>
+            </div>
+            <div id="reviewStatus" class="review-status" hidden></div>
+          </div>
+          <div id="reviewHistory" class="review-history" hidden>
+            <h4>Review History</h4>
+            <div id="reviewList"></div>
+          </div>
+        </div>
+
+        <!-- Signed Off Banner -->
+        <div id="signedOffBanner" class="result-card signed-off-banner" hidden>
+          <div class="signed-off-icon">&#x2713;</div>
+          <div>
+            <strong>Report Signed Off</strong>
+            <p id="signedOffBy"></p>
+          </div>
+        </div>
+
+        <!-- PDF Download -->
+        <div id="downloadSection" class="result-card download-card" hidden>
+          <div class="download-content">
+            <div class="download-icon">&#x1F4C4;</div>
+            <div>
+              <h3>Download Report</h3>
+              <p>Get the full triage report as a PDF document.</p>
+            </div>
+            <button class="btn-download" onclick="downloadPDF()" id="downloadBtn">
+              Download PDF
+            </button>
+          </div>
+        </div>
+
+        <div id="errorSection" class="result-card error-card" hidden>
+          <h3>Analysis Error</h3>
+          <p id="errorMessage"></p>
+        </div>
       </div>
 
-      <!-- Right: results (progressive reveal) -->
+      <!-- Right: scores + classification + findings -->
       <div class="results-panel">
 
-        <!-- Status bar -->
         <div id="statusBar" class="status-bar status-pending">
           <span id="statusText">Pending...</span>
         </div>
 
-        <!-- Section 1: Vision labels (appears at vision_done) -->
         <div id="visionSection" class="result-card" hidden>
           <h3>Detected Features</h3>
           <div id="visionLabels" class="label-list"></div>
         </div>
 
-        <!-- Section 2: CheXNet pathology scores (appears at complete) -->
         <div id="chexnetSection" class="result-card" hidden>
           <h3>CheXNet Pathology Scores</h3>
           <div id="chexnetScores"></div>
         </div>
 
-        <!-- Section 3: Classification (appears at complete) -->
         <div id="classificationSection" class="result-card" hidden>
           <h3>Classification</h3>
           <div class="classification-result">
@@ -61,28 +119,19 @@
           <div id="conditionsList" class="conditions-list"></div>
         </div>
 
-        <!-- Section 4: Findings (appears at complete) -->
         <div id="findingsSection" class="result-card" hidden>
           <h3>Key Findings</h3>
           <p id="findings"></p>
-        </div>
-
-        <!-- Section 5: Explanation (appears at complete) -->
-        <div id="explanationSection" class="result-card" hidden>
-          <h3>AI Explanation</h3>
-          <p id="explanation"></p>
-          <p class="disclaimer">This is an AI-generated analysis for decision support only.</p>
-        </div>
-
-        <!-- Error state -->
-        <div id="errorSection" class="result-card error-card" hidden>
-          <h3>Analysis Error</h3>
-          <p id="errorMessage"></p>
         </div>
       </div>
     </div>
   </div>
 
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="/js/firebase-config.js"></script>
+  <script src="/js/nav.js"></script>
   <script src="/js/result.js"></script>
 </body>
 </html>

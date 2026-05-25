@@ -19,4 +19,18 @@ async function uploadImage(fileBuffer, filename, mimetype) {
   };
 }
 
-module.exports = { uploadImage };
+async function uploadHeatmap(caseId, base64Data) {
+  const bucket = storage.bucket(BUCKET);
+  const blob = bucket.file(`heatmaps/${caseId}.png`);
+  const buffer = Buffer.from(base64Data, 'base64');
+
+  await blob.save(buffer, {
+    metadata: { contentType: 'image/png' }
+  });
+
+  await blob.makePublic();
+
+  return `https://storage.googleapis.com/${BUCKET}/heatmaps/${caseId}.png`;
+}
+
+module.exports = { uploadImage, uploadHeatmap };

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — MedTriageAI</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container dashboard-container">
+    <div class="dashboard-header">
+      <div>
+        <h2 id="welcomeMsg">Welcome</h2>
+        <p class="subtitle" id="roleDescription"></p>
+      </div>
+      <a href="/" class="btn-primary" style="width:auto; padding: 0.6rem 1.5rem; text-decoration: none;">
+        + New Analysis
+      </a>
+    </div>
+
+    <div class="stats-row" id="statsRow">
+      <div class="stat-card">
+        <div class="stat-value" id="statTotal">-</div>
+        <div class="stat-label">Total Cases</div>
+      </div>
+      <div class="stat-card stat-pending">
+        <div class="stat-value" id="statPending">-</div>
+        <div class="stat-label">Pending</div>
+      </div>
+      <div class="stat-card stat-complete">
+        <div class="stat-value" id="statComplete">-</div>
+        <div class="stat-label">Complete</div>
+      </div>
+      <div class="stat-card stat-error">
+        <div class="stat-value" id="statErrors">-</div>
+        <div class="stat-label">Errors</div>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all" onclick="filterCases('all', this)">All</button>
+      <button class="filter-btn" data-filter="pending" onclick="filterCases('pending', this)">Pending</button>
+      <button class="filter-btn" data-filter="complete" onclick="filterCases('complete', this)">Complete</button>
+      <button class="filter-btn" data-filter="signed_off" onclick="filterCases('signed_off', this)">Signed Off</button>
+      <button class="filter-btn" data-filter="error" onclick="filterCases('error', this)">Errors</button>
+    </div>
+
+    <div id="casesGrid" class="cases-grid">
+      <div class="loading">
+        <div class="spinner"></div>
+        <p>Loading cases...</p>
+      </div>
+    </div>
+
+    <div id="emptyState" class="empty-state" hidden>
+      <p>No cases found.</p>
+      <a href="/" class="btn-primary" style="width:auto; display:inline-block; padding: 0.6rem 1.5rem; text-decoration:none;">
+        Upload your first X-ray
+      </a>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="/js/firebase-config.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

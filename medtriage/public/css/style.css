@@ -19,7 +19,87 @@ header h1 { font-size: 2rem; color: #1a1a2e; }
 .disclaimer { color: #e74c3c; font-size: 0.85rem; margin-top: 0.5rem; font-style: italic; }
 .back-link { text-decoration: none; color: #2563eb; font-size: 0.9rem; }
 
-/* Upload area */
+/* ===== Navigation Bar ===== */
+.main-nav {
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 0.75rem 0;
+  margin-bottom: 1.5rem;
+}
+.nav-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 1rem; }
+.nav-link {
+  color: #6b7280;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+.nav-link:hover { color: #2563eb; background: #f0f4ff; }
+.nav-user { display: flex; align-items: center; gap: 0.75rem; }
+.nav-email { font-size: 0.85rem; color: #6b7280; }
+.role-badge {
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.role-patient { background: #dbeafe; color: #1e40af; }
+.role-clinician { background: #d1fae5; color: #065f46; }
+.role-admin { background: #ede9fe; color: #5b21b6; }
+.btn-logout {
+  background: none;
+  border: 1px solid #d1d5db;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: #6b7280;
+  transition: all 0.2s;
+}
+.btn-logout:hover { border-color: #e74c3c; color: #e74c3c; }
+
+/* ===== Auth Page ===== */
+.auth-section { max-width: 420px; margin: 0 auto; }
+.auth-card {
+  background: white; border-radius: 12px; padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.auth-tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 2px solid #e5e7eb; }
+.auth-tab {
+  flex: 1; padding: 0.75rem; background: none; border: none;
+  font-size: 1rem; cursor: pointer; color: #6b7280;
+  border-bottom: 2px solid transparent; margin-bottom: -2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.auth-tab.active { color: #2563eb; border-bottom-color: #2563eb; font-weight: 600; }
+.auth-tab:hover { color: #2563eb; }
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.3rem; color: #374151; }
+.form-group input, .form-group select {
+  width: 100%; padding: 0.6rem 0.75rem; border: 1px solid #d1d5db;
+  border-radius: 8px; font-size: 1rem; transition: border-color 0.2s;
+}
+.form-group input:focus, .form-group select:focus {
+  outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+
+/* ===== Upload Area ===== */
 .upload-section { max-width: 500px; margin: 0 auto; }
 
 .upload-area {
@@ -66,11 +146,106 @@ header h1 { font-size: 2rem; color: #1a1a2e; }
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* Result page */
+/* ===== Dashboard ===== */
+.dashboard-container { max-width: 960px; }
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.stat-value { font-size: 2rem; font-weight: 700; color: #1a1a2e; }
+.stat-label { font-size: 0.85rem; color: #6b7280; margin-top: 0.25rem; }
+.stat-pending .stat-value { color: #92400e; }
+.stat-complete .stat-value { color: #065f46; }
+.stat-error .stat-value { color: #991b1b; }
+
+.filter-bar { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.filter-btn {
+  padding: 0.4rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 20px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+.filter-btn:hover { border-color: #2563eb; color: #2563eb; }
+.filter-btn.active { background: #2563eb; color: white; border-color: #2563eb; }
+
+.cases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+.case-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.2s, transform 0.2s;
+  display: block;
+}
+.case-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.12); transform: translateY(-2px); }
+.case-card-image { height: 160px; overflow: hidden; background: #f0f2f5; }
+.case-card-image img { width: 100%; height: 100%; object-fit: cover; }
+.no-image {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+}
+.case-card-info { padding: 1rem; }
+.case-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+.status-badge {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+}
+.status-badge.status-pending, .status-badge.status-vision_processing,
+.status-badge.status-vision_done, .status-badge.status-analyzing { background: #fef3c7; color: #92400e; }
+.status-badge.status-complete { background: #d1fae5; color: #065f46; }
+.status-badge.status-signed_off { background: #dbeafe; color: #1e40af; }
+.status-badge.status-reviewed { background: #ede9fe; color: #5b21b6; }
+.status-badge.status-awaiting_radiologist { background: #fef3c7; color: #92400e; }
+.status-badge.status-error { background: #fee2e2; color: #991b1b; }
+.case-date { font-size: 0.8rem; color: #9ca3af; }
+.case-card-classification { margin-bottom: 0.3rem; }
+.severity-tag {
+  font-size: 0.75rem; padding: 0.1rem 0.4rem; border-radius: 6px; margin-left: 0.5rem;
+}
+.severity-normal { background: #d1fae5; color: #065f46; }
+.severity-mild { background: #fef3c7; color: #92400e; }
+.severity-moderate { background: #fed7aa; color: #9a3412; }
+.severity-severe { background: #fee2e2; color: #991b1b; }
+.case-card-user { font-size: 0.8rem; color: #6b7280; }
+.case-card-id { font-size: 0.75rem; color: #9ca3af; font-family: monospace; margin-top: 0.25rem; }
+
+.empty-state { text-align: center; padding: 3rem 1rem; color: #6b7280; }
+.empty-state p { margin-bottom: 1rem; }
+
+/* ===== Result Page ===== */
 .result-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
 @media (max-width: 700px) { .result-layout { grid-template-columns: 1fr; } }
 
-.image-panel { position: sticky; top: 1rem; }
+.image-panel { display: flex; flex-direction: column; gap: 1rem; }
 .image-placeholder {
   background: #e5e7eb; border-radius: 12px; padding: 4rem 2rem;
   text-align: center; min-height: 300px;
@@ -79,20 +254,6 @@ header h1 { font-size: 2rem; color: #1a1a2e; }
 .result-image {
   width: 100%; border-radius: 12px; border: 1px solid #ddd;
   transition: opacity 0.3s ease;
-}
-
-/* Heatmap toggle */
-.heatmap-toggle {
-  margin-top: 0.75rem;
-  text-align: center;
-}
-.heatmap-toggle p {
-  font-size: 0.8rem;
-  color: #888;
-  margin-top: 0.35rem;
-}
-.heatmap-toggle strong {
-  color: #1a1a2e;
 }
 
 .results-panel { display: flex; flex-direction: column; gap: 1rem; }
@@ -104,6 +265,9 @@ header h1 { font-size: 2rem; color: #1a1a2e; }
 .status-pending, .status-vision_processing { background: #fef3c7; color: #92400e; }
 .status-vision_done, .status-analyzing { background: #dbeafe; color: #1e40af; }
 .status-complete { background: #d1fae5; color: #065f46; }
+.status-reviewed { background: #ede9fe; color: #5b21b6; }
+.status-signed_off { background: #dbeafe; color: #1e40af; }
+.status-awaiting_radiologist { background: #fef3c7; color: #92400e; }
 .status-error { background: #fee2e2; color: #991b1b; }
 
 .result-card {
@@ -126,9 +290,7 @@ header h1 { font-size: 2rem; color: #1a1a2e; }
 .label-tag small { color: #6b7280; margin-left: 0.2rem; }
 
 /* CheXNet score bars */
-.chexnet-bar-row {
-  margin-bottom: 0.6rem;
-}
+.chexnet-bar-row { margin-bottom: 0.6rem; }
 .chexnet-bar-label {
   display: flex;
   justify-content: space-between;
@@ -176,3 +338,191 @@ header h1 { font-size: 2rem; color: #1a1a2e; }
 }
 .condition-name { font-weight: 600; min-width: 140px; }
 .condition-location { color: #6b7280; font-size: 0.85rem; margin-left: auto; }
+
+/* ===== Clinician Review Panel ===== */
+.review-card { border-left: 4px solid #2563eb; }
+.review-form .form-group { margin-bottom: 1rem; }
+.review-form label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: #374151;
+}
+.review-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: vertical;
+  min-height: 100px;
+  transition: border-color 0.2s;
+}
+.review-form textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+.review-form select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.review-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+.btn-draft {
+  padding: 0.6rem 1.25rem;
+  background: #f59e0b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.btn-draft:hover { background: #d97706; }
+.btn-signoff {
+  padding: 0.6rem 1.25rem;
+  background: #059669;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.btn-signoff:hover { background: #047857; }
+.btn-escalate {
+  padding: 0.6rem 1.25rem;
+  background: none;
+  color: #dc2626;
+  border: 1px solid #dc2626;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+.btn-escalate:hover { background: #fee2e2; }
+
+.review-status {
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+.review-status.success { background: #d1fae5; color: #065f46; }
+.review-status.error { background: #fee2e2; color: #991b1b; }
+.review-status.info { background: #dbeafe; color: #1e40af; }
+
+/* Signed Off Banner */
+.signed-off-banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #f0fdf4;
+  border-left: 4px solid #059669;
+}
+.signed-off-icon {
+  font-size: 2rem;
+  color: #059669;
+  font-weight: bold;
+}
+.signed-off-banner p { color: #6b7280; font-size: 0.9rem; margin-top: 0.25rem; }
+
+/* Review History */
+.review-history { margin-top: 1.5rem; border-top: 1px solid #e5e7eb; padding-top: 1rem; }
+.review-history h4 { font-size: 0.9rem; color: #6b7280; margin-bottom: 0.75rem; }
+.review-item {
+  padding: 0.75rem;
+  background: #f8fafc;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+.review-item.review-signed { border-left: 3px solid #059669; }
+.review-item-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+.review-clinician { font-weight: 600; font-size: 0.85rem; }
+.review-time { font-size: 0.8rem; color: #9ca3af; }
+.review-badge-signed {
+  font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 6px;
+  background: #d1fae5; color: #065f46; font-weight: 600;
+}
+.review-badge-draft {
+  font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 6px;
+  background: #fef3c7; color: #92400e; font-weight: 600;
+}
+.review-item-body { font-size: 0.85rem; color: #374151; }
+.review-item-body p { margin-bottom: 0.25rem; }
+
+/* ===== PDF Download ===== */
+.download-card {
+  background: #f0f9ff;
+  border-left: 4px solid #0ea5e9;
+}
+.download-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.download-icon { font-size: 2rem; }
+.download-content h3 {
+  margin-bottom: 0.1rem;
+  text-transform: none;
+  letter-spacing: normal;
+  color: #0c4a6e;
+}
+.download-content p {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin: 0;
+}
+.btn-download {
+  margin-left: auto;
+  padding: 0.6rem 1.5rem;
+  background: #0ea5e9;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+.btn-download:hover:not(:disabled) { background: #0284c7; }
+.btn-download:disabled { background: #94a3b8; cursor: not-allowed; }
+.download-card .loading {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+.download-card .spinner { width: 20px; height: 20px; }
+
+/* ===== Responsive ===== */
+@media (max-width: 700px) {
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .dashboard-header { flex-direction: column; gap: 1rem; align-items: flex-start; }
+  .nav-inner { flex-wrap: wrap; gap: 0.5rem; }
+  .nav-user { font-size: 0.85rem; }
+  .download-content { flex-direction: column; text-align: center; }
+  .btn-download { margin-left: 0; }
+}

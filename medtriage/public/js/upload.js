@@ -10,10 +10,12 @@ const loading = document.getElementById('loading');
 
 let selectedFile = null;
 
-// Click to browse
+auth.onAuthStateChanged(user => {
+  if (!user) window.location.href = '/login';
+});
+
 dropZone.addEventListener('click', () => fileInput.click());
 
-// Drag & drop
 dropZone.addEventListener('dragover', (e) => {
   e.preventDefault();
   dropZone.classList.add('dragover');
@@ -65,11 +67,18 @@ analyzeBtn.addEventListener('click', async () => {
   uploadError.hidden = true;
 
   try {
+    const token = await getAuthToken();
+    if (!token) {
+      window.location.href = '/login';
+      return;
+    }
+
     const formData = new FormData();
     formData.append('image', selectedFile);
 
     const res = await fetch('/api/upload', {
       method: 'POST',
+      headers: { 'Authorization': `Bearer ${token}` },
       body: formData
     });
 
@@ -79,8 +88,6 @@ analyzeBtn.addEventListener('click', async () => {
     }
 
     const { caseId } = await res.json();
-
-    // Redirect to result page
     window.location.href = `/case/${caseId}`;
 
   } catch (err) {

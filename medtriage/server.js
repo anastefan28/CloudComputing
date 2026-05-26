@@ -1,14 +1,26 @@
 const express = require('express');
 const cors = require('cors');
 const { verifyToken, registerRole } = require('./services/auth');
+const { Firestore } = require('@google-cloud/firestore');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
+const db = new Firestore({ databaseId: 'medtriage-db' });
+
 // Auth API
 app.post('/api/auth/register-role', verifyToken, registerRole);
+app.get('/api/user/me', verifyToken, async (req, res) => {
+  try {
+    const doc = await db.collection('users').doc(req.user.uid).get();
+    const data = doc.exists ? doc.data() : {};
+    res.json({ uploadCredits: data.uploadCredits ?? 0, role: req.user.role });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 // Case-related APIs (more specific paths first)
 app.use('/api/cases', require('./routes/reports'));   // /:id/report.pdf

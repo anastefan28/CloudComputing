@@ -235,8 +235,48 @@ header h1 { font-size: 2rem; color: #1a1a2e; }
 .severity-mild { background: #fef3c7; color: #92400e; }
 .severity-moderate { background: #fed7aa; color: #9a3412; }
 .severity-severe { background: #fee2e2; color: #991b1b; }
+.case-card-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 0.25rem; }
 .case-card-user { font-size: 0.8rem; color: #6b7280; }
-.case-card-id { font-size: 0.75rem; color: #9ca3af; font-family: monospace; margin-top: 0.25rem; }
+.case-card-id { font-size: 0.75rem; color: #9ca3af; font-family: monospace; }
+
+/* Section headers */
+.section-header { display: flex; align-items: center; gap: 0.6rem; margin: 1.5rem 0 0.75rem; }
+.section-header h3 { font-size: 1rem; font-weight: 700; color: #374151; margin: 0; }
+.section-header-urgent h3 { color: #c2410c; }
+.section-header-dot {
+  width: 10px; height: 10px; border-radius: 50%; background: #ef4444; flex-shrink: 0;
+  animation: pulse-dot 1.5s infinite;
+}
+
+/* Needs-review card highlight */
+.case-card.needs-review { border: 2px solid #f97316; }
+.needs-review-banner {
+  background: #fff7ed;
+  color: #c2410c;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.3rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-bottom: 1px solid #fed7aa;
+}
+.needs-review-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #ef4444;
+  animation: pulse-dot 1.5s infinite;
+  flex-shrink: 0;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.4); }
+}
+
+/* Needs-review filter button */
+.filter-btn.filter-urgent { border-color: #f97316; color: #c2410c; }
+.filter-btn.filter-urgent:hover { background: #fff7ed; }
+.filter-btn.filter-urgent.filter-urgent-active { background: #fff7ed; border-color: #ef4444; font-weight: 600; }
+.filter-btn.filter-urgent.active { background: #f97316; color: white; border-color: #f97316; }
 
 .empty-state { text-align: center; padding: 3rem 1rem; color: #6b7280; }
 .empty-state p { margin-bottom: 1rem; }
@@ -426,6 +466,7 @@ header h1 { font-size: 2rem; color: #1a1a2e; }
 .review-status.info { background: #dbeafe; color: #1e40af; }
 
 /* Signed Off Banner */
+.signed-off-banner[hidden] { display: none; }
 .signed-off-banner {
   display: flex;
   align-items: center;
@@ -516,6 +557,59 @@ header h1 { font-size: 2rem; color: #1a1a2e; }
   color: #6b7280;
 }
 .download-card .spinner { width: 20px; height: 20px; }
+
+/* ===== Credits Bar ===== */
+.credits-bar[hidden] { display: none; }
+.credits-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.65rem 1rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.9rem;
+}
+.credits-label { color: #64748b; }
+.credits-value { font-size: 1.2rem; font-weight: 700; min-width: 1.5rem; text-align: center; }
+.credits-value.credits-ok    { color: #16a34a; }
+.credits-value.credits-low   { color: #d97706; }
+.credits-value.credits-empty { color: #dc2626; }
+.credits-hint { color: #94a3b8; font-size: 0.8rem; margin-left: auto; }
+
+/* ===== Patient Notices ===== */
+.radiologist-banner[hidden] { display: none; }
+.radiologist-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: #fef2f2;
+  border: 2px solid #dc2626;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.radiologist-banner-icon {
+  font-size: 2rem;
+  color: #dc2626;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.radiologist-banner strong { color: #991b1b; font-size: 1.05rem; display: block; margin-bottom: 0.25rem; }
+.radiologist-banner p { color: #7f1d1d; font-size: 0.9rem; margin: 0; line-height: 1.5; }
+
+.awaiting-review-notice[hidden] { display: none; }
+.awaiting-review-notice {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #fffbeb;
+  border-left: 4px solid #f59e0b;
+}
+.awaiting-review-icon { font-size: 1.75rem; color: #d97706; flex-shrink: 0; }
+.awaiting-review-notice strong { color: #92400e; display: block; margin-bottom: 0.2rem; }
+.awaiting-review-notice p { color: #78350f; font-size: 0.85rem; margin: 0; }
 
 /* ===== Responsive ===== */
 @media (max-width: 700px) {

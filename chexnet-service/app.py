@@ -59,7 +59,19 @@ if os.path.exists(weights_path):
                 new_state_dict[new_key] = v
             else:
                 new_state_dict[k] = v
-        model.load_state_dict(new_state_dict, strict=False)
+        # Old torchvision DenseNet used 'norm.1'/'conv.1'/'norm.2'/'conv.2';
+        # current torchvision uses 'norm1'/'conv1'/'norm2'/'conv2' (dot removed)
+        new_state_dict = {
+            k.replace('.norm.1', '.norm1').replace('.conv.1', '.conv1')
+             .replace('.norm.2', '.norm2').replace('.conv.2', '.conv2')
+             .replace('model.classifier.0.', 'model.classifier.'): v
+            for k, v in new_state_dict.items()
+        }
+        classifier_keys = [k for k in new_state_dict if 'classifier' in k]
+        print(f"Classifier keys in checkpoint: {classifier_keys}")
+        result = model.load_state_dict(new_state_dict, strict=False)
+        print(f"Missing keys: {result.missing_keys}")
+        print(f"Unexpected keys: {result.unexpected_keys}")
     else:
         model.load_state_dict(checkpoint, strict=False)
     print("Model weights loaded successfully")

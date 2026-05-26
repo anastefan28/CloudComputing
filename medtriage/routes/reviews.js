@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { verifyToken, requireRole } = require('../services/auth');
-const { getCase, updateCase, createReview, getReviews } = require('../services/firestore');
+const { getCase, updateCase, createReview, getReviews, earnUploadCredit } = require('../services/firestore');
+const cache = require('../services/cache');
 
 router.post('/:id/review', verifyToken, requireRole('clinician', 'admin'), async (req, res) => {
   try {
@@ -43,6 +44,8 @@ router.post('/:id/review', verifyToken, requireRole('clinician', 'admin'), async
       await updateCase(id, { status: 'reviewed' });
     }
 
+    await cache.invalidate(id);
+    if (req.user.role === 'clinician') await earnUploadCredit(req.user.uid);
     res.json({ success: true, reviewId, status: signOff ? 'signed_off' : 'reviewed' });
   } catch (err) {
     console.error('Review error:', err);
@@ -64,6 +67,7 @@ router.post('/:id/escalate', verifyToken, requireRole('clinician', 'admin'), asy
       escalatedAt: new Date().toISOString()
     });
 
+    await cache.invalidate(id);
     res.json({ success: true, status: 'awaiting_radiologist' });
   } catch (err) {
     console.error('Escalate error:', err);

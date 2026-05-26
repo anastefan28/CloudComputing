@@ -33,4 +33,18 @@ async function uploadHeatmap(caseId, base64Data) {
   return `https://storage.googleapis.com/${BUCKET}/heatmaps/${caseId}.png`;
 }
 
-module.exports = { uploadImage, uploadHeatmap };
+async function uploadPDF(caseId, pdfBuffer) {
+  const bucket = storage.bucket(BUCKET);
+  const blob = bucket.file(`reports/${caseId}.pdf`);
+  await blob.save(pdfBuffer, { metadata: { contentType: 'application/pdf' } });
+}
+
+async function downloadPDF(caseId) {
+  try {
+    const bucket = storage.bucket(BUCKET);
+    const [buffer] = await bucket.file(`reports/${caseId}.pdf`).download();
+    return buffer;
+  } catch { return null; }
+}
+
+module.exports = { uploadImage, uploadHeatmap, uploadPDF, downloadPDF };

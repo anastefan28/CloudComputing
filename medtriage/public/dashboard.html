@@ -37,18 +37,40 @@
       </div>
     </div>
 
+    <div id="creditsBar" class="credits-bar" hidden>
+      <span class="credits-label">Upload credits remaining:</span>
+      <span class="credits-value" id="creditsValue">-</span>
+      <span class="credits-hint">Each upload costs 1 credit.</span>
+    </div>
+
     <div class="filter-bar">
       <button class="filter-btn active" data-filter="all" onclick="filterCases('all', this)">All</button>
+      <button class="filter-btn filter-urgent" id="filterNeedsReview" data-filter="needs_review" onclick="filterCases('needs_review', this)" hidden>Needs Review</button>
       <button class="filter-btn" data-filter="pending" onclick="filterCases('pending', this)">Pending</button>
       <button class="filter-btn" data-filter="complete" onclick="filterCases('complete', this)">Complete</button>
       <button class="filter-btn" data-filter="signed_off" onclick="filterCases('signed_off', this)">Signed Off</button>
       <button class="filter-btn" data-filter="error" onclick="filterCases('error', this)">Errors</button>
     </div>
 
-    <div id="casesGrid" class="cases-grid">
-      <div class="loading">
-        <div class="spinner"></div>
-        <p>Loading cases...</p>
+    <!-- Clinician-only: cases awaiting review -->
+    <div id="reviewSection" hidden>
+      <div class="section-header section-header-urgent">
+        <span class="section-header-dot"></span>
+        <h3 id="reviewSectionTitle">Awaiting Review</h3>
+      </div>
+      <div id="reviewGrid" class="cases-grid"></div>
+    </div>
+
+    <!-- All cases (or patient's own cases) -->
+    <div id="allSection">
+      <div id="clinicianAllHeader" class="section-header" hidden>
+        <h3>All Cases</h3>
+      </div>
+      <div id="casesGrid" class="cases-grid">
+        <div class="loading">
+          <div class="spinner"></div>
+          <p>Loading cases...</p>
+        </div>
       </div>
     </div>
 

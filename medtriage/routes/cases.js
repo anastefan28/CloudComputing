@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { getCase, listCases } = require('../services/firestore');
 const { verifyToken } = require('../services/auth');
+const cache = require('../services/cache');
 
 router.get('/', verifyToken, async (req, res) => {
   try {
@@ -19,8 +20,15 @@ router.get('/', verifyToken, async (req, res) => {
 router.get('/:id', verifyToken, async (req, res) => {
   try {
     res.set('Cache-Control', 'no-store');
-    const caseData = await getCase(req.params.id);
-    if (!caseData) return res.status(404).json({ error: 'Case not found' });
+    const { id } = req.params;
+
+    let caseData = await cache.getCase(id);
+
+    if (!caseData) {
+      caseData = await getCase(id);
+      if (!caseData) return res.status(404).json({ error: 'Case not found' });
+      await cache.setCase(id, caseData);
+    }
 
     if (req.user.role === 'patient' && caseData.userId !== req.user.uid) {
       return res.status(403).json({ error: 'Access denied' });

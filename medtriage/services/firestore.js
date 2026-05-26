@@ -58,4 +58,28 @@ async function getReviews(caseId) {
   return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 }
 
-module.exports = { createCase, updateCase, getCase, listCases, createReview, getReviews };
+const INITIAL_CREDITS = { patient: 3, clinician: 1 };
+
+async function spendUploadCredit(uid) {
+  const userRef = db.collection('users').doc(uid);
+  return db.runTransaction(async tx => {
+    const doc = await tx.get(userRef);
+    const credits = doc.exists ? (doc.data().uploadCredits ?? 0) : 0;
+    if (credits <= 0) return false;
+    tx.update(userRef, { uploadCredits: FieldValue.increment(-1) });
+    return true;
+  });
+}
+
+async function earnUploadCredit(uid) {
+  await db.collection('users').doc(uid).update({
+    uploadCredits: FieldValue.increment(1)
+  });
+}
+
+async function initUserCredits(uid, role) {
+  const credits = INITIAL_CREDITS[role] ?? 0;
+  await db.collection('users').doc(uid).update({ uploadCredits: credits });
+}
+
+module.exports = { createCase, updateCase, getCase, listCases, createReview, getReviews, spendUploadCredit, earnUploadCredit, initUserCredits };

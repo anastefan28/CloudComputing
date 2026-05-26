@@ -12,6 +12,15 @@
       <h1>MedTriageAI</h1>
     </header>
 
+    <!-- Radiologist Escalation Alert (patients only) -->
+    <div id="radiologistBanner" class="radiologist-banner" hidden>
+      <div class="radiologist-banner-icon">&#x26A0;</div>
+      <div>
+        <strong>Urgent: Radiologist Consultation Required</strong>
+        <p>Your case has been reviewed and escalated by a clinician. Please schedule an appointment with a radiologist as soon as possible.</p>
+      </div>
+    </div>
+
     <div class="result-layout">
       <!-- Left: image + heatmap + explanation + review -->
       <div class="image-panel">
@@ -32,6 +41,15 @@
           <h3>AI Explanation</h3>
           <p id="explanation"></p>
           <p class="disclaimer">This is an AI-generated analysis for decision support only.</p>
+        </div>
+
+        <!-- Awaiting Clinician Review Notice (patients only) -->
+        <div id="awaitingReviewNotice" class="result-card awaiting-review-notice" hidden>
+          <div class="awaiting-review-icon">&#x23F3;</div>
+          <div>
+            <strong>Awaiting Clinician Review</strong>
+            <p>The AI analysis is complete. A clinician will review your results shortly.</p>
+          </div>
         </div>
 
         <!-- Clinician Review Panel -->

@@ -10,7 +10,7 @@ const genAI = new GoogleGenerativeAI(API_KEY);
  * @param {Object} chexnetScores  - { classScores: {Effusion: 0.82, ...}, topFindings: [...], gradcamClass: "Effusion" }
  */
 async function analyzeWithGemini(imageBuffer, mimetype, visionLabels, chexnetScores) {
-  const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-preview-05-20' });
+  const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
   const imagePart = {
     inlineData: {

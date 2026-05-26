@@ -68,13 +68,24 @@ function updateUI(data) {
     vision_processing: 'Running Vision API & CheXNet in parallel...',
     vision_done: 'CheXNet scores ready — running Gemini analysis...',
     analyzing: 'AI analyzing image...',
-    complete: 'Analysis complete',
-    reviewed: 'Reviewed by clinician',
+    complete: userRole === 'patient' ? 'Awaiting clinician review' : 'Analysis complete',
+    reviewed: userRole === 'patient' ? 'Awaiting clinician sign-off' : 'Reviewed by clinician',
     signed_off: 'Report signed off',
-    awaiting_radiologist: 'Escalated — awaiting radiologist',
+    awaiting_radiologist: userRole === 'patient' ? 'Escalated — see a radiologist' : 'Escalated — awaiting radiologist',
     error: 'Error occurred'
   };
   statusText.textContent = statusMessages[data.status] || data.status;
+
+  // Patient-specific banners
+  const radiologistBanner = document.getElementById('radiologistBanner');
+  const awaitingReviewNotice = document.getElementById('awaitingReviewNotice');
+  if (userRole === 'patient') {
+    radiologistBanner.hidden = data.status !== 'awaiting_radiologist';
+    awaitingReviewNotice.hidden = !['complete', 'reviewed'].includes(data.status);
+  } else {
+    radiologistBanner.hidden = true;
+    awaitingReviewNotice.hidden = true;
+  }
 
   if (data.imageUrl && !showingHeatmap) {
     originalImageUrl = data.imageUrl;

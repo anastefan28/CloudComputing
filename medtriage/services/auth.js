@@ -47,10 +47,12 @@ async function registerRole(req, res) {
 
     await admin.auth().setCustomUserClaims(req.user.uid, { role });
 
+    const initialCredits = role === 'patient' ? 3 : 1;
     await db.collection('users').doc(req.user.uid).set({
       uid: req.user.uid,
       email: req.user.email,
       role,
+      uploadCredits: initialCredits,
       createdAt: admin.firestore.FieldValue.serverTimestamp()
     });
 
